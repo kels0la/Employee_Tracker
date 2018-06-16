@@ -16,26 +16,48 @@ $(document).ready(function(){
 
     $("#subBtn").click(function(event){
 
-    event.preventDefault()
+        event.preventDefault()
 
-    name = $("#name").val().trim();
-    role = $("#role").val().trim();
-    startdate = $("#startDate").val().trim();
-    monthlyRate = $("#rate").val().trim();
+        name = $("#name").val().trim();
+        role = $("#role").val().trim();
+        startdate = $("#startDate").val().trim();
+        monthlyRate = $("#rate").val().trim();
 
-    database.ref().push({    
-        name: name,
-        role: role,
-        startdate: startdate,
-        monthlyRate: monthlyRate,
-        dateAdded: firebase.database.ServerValue.TIMESTAMP // takes timseamp of when the data goes into the database
+        database.ref().push({    
+            name: name,
+            role: role,
+            startdate: startdate,
+            monthlyRate: monthlyRate,
+            dateAdded: firebase.database.ServerValue.TIMESTAMP // takes timseamp of when the data goes into the database
+        });
 
     });
 
-//database.ref().on("child_added", function(childsnapshot)){}
+    database.ref().on("child_added", function(snapshot){
+        
+        var sv = snapshot.val();
 
-    database.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", function(snapshot){
-        $("namedisplay").html(snapshot.val().name);
+        var newRow = $("<tr>");
+        var nameTd = $("<td>");
+        var roleTd = $("<td>");
+        var startTd = $("<td>");
+        var monthsTd = $("<td>");
+        var rateTd = $("<td>");
+        var billedTd = $("<td>");
+    
+        nameTd.text(sv.name);
+        roleTd.text(sv.role);
+        startTd.text(sv.startdate);
+        rateTd.text(sv.monthlyRate);
+    
+        newRow.append(nameTd);
+        newRow.append(roleTd);
+        newRow.append(startTd);
+        newRow.append(monthsTd);
+        newRow.append(rateTd);
+        newRow.append(billedTd);
+    
+        $("#tBody").append(newRow);
         
     })
 
@@ -60,18 +82,5 @@ $(document).ready(function(){
     newRow.append(billedTd);
 
     $("#tBody").append(newRow);
-
-
-    
-});
-
-
-
-
-
-
-
-
-
 
 });
