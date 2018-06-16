@@ -12,7 +12,6 @@ $(document).ready(function(){
         firebase.initializeApp(config);
     
         var database = firebase.database()
-    
 
     $("#subBtn").click(function(event){
 
@@ -36,6 +35,8 @@ $(document).ready(function(){
     database.ref().on("child_added", function(snapshot){
         
         var sv = snapshot.val();
+        var months = moment(currentDate).diff(sv.startdate,"month");
+        var currentDate = moment()
 
         var newRow = $("<tr>");
         var nameTd = $("<td>");
@@ -49,6 +50,8 @@ $(document).ready(function(){
         roleTd.text(sv.role);
         startTd.text(sv.startdate);
         rateTd.text(sv.monthlyRate);
+        monthsTd.text(months)
+        billedTd.text(months*sv.monthlyRate)
     
         newRow.append(nameTd);
         newRow.append(roleTd);
@@ -61,26 +64,7 @@ $(document).ready(function(){
         
     })
 
-    var newRow = $("<tr>");
-    var nameTd = $("<td>");
-    var roleTd = $("<td>");
-    var startTd = $("<td>");
-    var monthsTd = $("<td>");
-    var rateTd = $("<td>");
-    var billedTd = $("<td>");
+    
 
-    nameTd.text(name);
-    roleTd.text(role);
-    startTd.text(startdate);
-    rateTd.text(monthlyRate);
-
-    newRow.append(nameTd);
-    newRow.append(roleTd);
-    newRow.append(startTd);
-    newRow.append(monthsTd);
-    newRow.append(rateTd);
-    newRow.append(billedTd);
-
-    $("#tBody").append(newRow);
 
 });
