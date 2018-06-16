@@ -23,8 +23,7 @@ $(document).ready(function(){
     startdate = $("#startDate").val().trim();
     monthlyRate = $("#rate").val().trim();
 
-    database.ref().push({
-        
+    database.ref().push({    
         name: name,
         role: role,
         startdate: startdate,
@@ -48,10 +47,10 @@ $(document).ready(function(){
     var rateTd = $("<td>");
     var billedTd = $("<td>");
 
-    nameTd.text($("#name").val());
-    roleTd.text($("#role").val());
-    startTd.text($("#startDate").val());
-    rateTd.text($("#rate").val());
+    nameTd.text(name);
+    roleTd.text(role);
+    startTd.text(startdate);
+    rateTd.text(monthlyRate);
 
     newRow.append(nameTd);
     newRow.append(roleTd);
