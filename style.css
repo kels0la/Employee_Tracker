@@ -1,0 +1,23 @@
+th {
+    font-size: 20px;
+}
+td {
+    font-size: 14px;
+}
+#header {
+    text-align: center;
+    font-size: 30px;
+    background-color: #212529;
+    color: #fff;
+    font-weight: bold;
+}
+.form-row {
+    padding: 4px;
+}
+.formcontainer {
+    background-color: #212529;
+    color: #fff;
+}
+.btn-dark {
+    margin-top: 10px;
+}
